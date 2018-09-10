@@ -1,15 +1,10 @@
-import 'package:flutter/material.dart';
+import '../assets.dart' as assets;
 
-import '../constants.dart' as globals;
+import 'tab_viewport.dart';
 
-class PharmaViewport extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) => Container(
-        child: Center(
-          child: Text(
-            globals.pharmaViewportMessage,
-            style: TextStyle(fontSize: globals.viewportMessageFontSize),
-          ),
-        ),
-      );
+class PharmaViewport extends TabViewport {
+  PharmaViewport()
+      : super(
+          articleList: assets.pharmaList,
+        );
 }

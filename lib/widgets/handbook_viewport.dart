@@ -1,15 +1,10 @@
-import 'package:flutter/material.dart';
+import '../assets.dart' as assets;
 
-import '../constants.dart' as globals;
+import 'tab_viewport.dart';
 
-class HandbookViewport extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) => Container(
-        child: Center(
-          child: Text(
-            globals.handbookViewportMessage,
-            style: TextStyle(fontSize: globals.viewportMessageFontSize),
-          ),
-        ),
-      );
+class HandbookViewport extends TabViewport {
+  HandbookViewport()
+      : super(
+          articleList: assets.handbookList,
+        );
 }
