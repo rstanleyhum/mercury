@@ -6,5 +6,9 @@ class PharmaViewport extends TabViewport {
   PharmaViewport()
       : super(
           articleList: assets.pharmaList,
+          startIndex: 2,
+          onChanging: (int index) {
+            print("Pharma index: $index");
+          },
         );
 }

@@ -6,5 +6,9 @@ class HandbookViewport extends TabViewport {
   HandbookViewport()
       : super(
           articleList: assets.handbookList,
+          startIndex: 0,
+          onChanging: (int index) {
+            print("Handbook index: $index");
+          },
         );
 }
