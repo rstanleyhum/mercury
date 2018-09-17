@@ -38,6 +38,33 @@ class _BaseViewState extends State<BaseView> with TickerProviderStateMixin {
   ExtendedTabController _handbookController;
   ExtendedTabController _pharmaController;
 
+  List<MainViewport> _createViewports({
+    ExtendedTabController newsController,
+    ExtendedTabController handbookController,
+    ExtendedTabController pharmaController,
+    List<Article> newsArticles,
+    List<Article> handbookArticles,
+    List<Article> pharmaArticles,
+  }) {
+    return [
+      MainViewport(
+        key: MercuryKeys.newsViewport,
+        controller: newsController,
+        articles: newsArticles,
+      ),
+      MainViewport(
+        key: MercuryKeys.handbookViewport,
+        controller: handbookController,
+        articles: handbookArticles,
+      ),
+      MainViewport(
+        key: MercuryKeys.pharmaViewport,
+        controller: pharmaController,
+        articles: pharmaArticles,
+      ),
+    ];
+  }
+
   @override
   void dispose() {
     _newsController.dispose();
@@ -69,7 +96,7 @@ class _BaseViewState extends State<BaseView> with TickerProviderStateMixin {
             key: MercuryKeys.pharmaController,
             vsync: this,
             length: store.state.pharmaArticles.length,
-            initialIndex: store.state.pharmaIndex,
+            initialIndex: store.state.pharmaIndex + 1,
             callback: (i) => store.dispatch(SetPharmaIndexAction(i)),
           );
           store.dispatch(SetInitialTabAction());
@@ -79,23 +106,14 @@ class _BaseViewState extends State<BaseView> with TickerProviderStateMixin {
               appBar: PrimaryTopBar(
                 index: vm.activeIndex,
               ),
-              body: <Widget>[
-                MainViewport(
-                  key: MercuryKeys.newsViewport,
-                  controller: _newsController,
-                  articles: vm.newsArticles,
-                ),
-                MainViewport(
-                  key: MercuryKeys.handbookViewport,
-                  controller: _handbookController,
-                  articles: vm.handbookArticles,
-                ),
-                MainViewport(
-                  key: MercuryKeys.pharmaViewport,
-                  controller: _pharmaController,
-                  articles: vm.pharmaArticles,
-                ),
-              ][vm.activeIndex],
+              body: _createViewports(
+                newsController: _newsController,
+                handbookController: _handbookController,
+                pharmaController: _pharmaController,
+                newsArticles: vm.newsArticles,
+                handbookArticles: vm.handbookArticles,
+                pharmaArticles: vm.pharmaArticles,
+              )[vm.activeIndex],
               bottomNavigationBar: PrimaryBottomBar(
                 currentIndex: vm.activeIndex,
                 onTabSelected: vm.onTabSelected,
@@ -147,10 +165,11 @@ class _ViewModel {
       );
 
   @override
-  int get hashCode => activeIndex.hashCode ^
-    newsArticles.hashCode ^
-    handbookArticles.hashCode ^
-    pharmaArticles.hashCode;
+  int get hashCode =>
+      activeIndex.hashCode ^
+      newsArticles.hashCode ^
+      handbookArticles.hashCode ^
+      pharmaArticles.hashCode;
 
   @override
   bool operator ==(Object other) =>
