@@ -33,3 +33,11 @@ class SetPharmaIndexAction {
   @override
   String toString() => 'SetPharmaIndexAction{index: $index}';
 }
+
+class SetInitialTabAction {
+
+  SetInitialTabAction();
+
+  @override
+  String toString() => 'SetInitialTabAction{}}';
+}

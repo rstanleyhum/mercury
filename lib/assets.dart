@@ -1,3 +1,6 @@
+import 'models/article.dart';
+
+
 String news1md = """
 # News Article 1
 
@@ -96,6 +99,22 @@ This is a test of the emergency broadcast system.
 By Stanley Hum
 """;
 
-var newsList = [news1md, news2md, news3md];
-var handbookList = [handbook1md, handbook2md, handbook3md, handbook4md];
-var pharmaList = [pharma1md, pharma2md, pharma3md, pharma4md, pharma5md];
+var newsList = [
+  Article(key: 'news1md', mdcontent: news1md),
+  Article(key: 'news2md', mdcontent: news2md),
+  Article(key: 'news3md', mdcontent: news3md),
+];
+var handbookList = [
+  Article(key: 'handbook1md', mdcontent: handbook1md),
+  Article(key: 'handbook2md', mdcontent: handbook2md),
+  Article(key: 'handbook3md', mdcontent: handbook3md),
+  Article(key: 'handbook4md', mdcontent: handbook4md),
+];
+var pharmaList = [
+  Article(key: 'pharma1md', mdcontent: pharma1md),
+  Article(key: 'pharma2md', mdcontent: pharma2md),
+  Article(key: 'pharma3md', mdcontent: pharma3md),
+  Article(key: 'pharma4md', mdcontent: pharma4md),
+  Article(key: 'pharma5md', mdcontent: pharma5md),
+];
+

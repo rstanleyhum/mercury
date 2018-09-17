@@ -8,21 +8,17 @@ import '../actions/actions.dart';
 import '../models/app_state.dart';
 
 import '../widgets/primary_top_bar.dart';
-import '../widgets/news_viewport.dart';
-import '../widgets/handbook_viewport.dart';
-import '../widgets/pharma_viewport.dart';
 import '../widgets/primary_bottom_bar.dart';
 import '../widgets/main_drawer.dart';
+import '../widgets/main_viewport.dart';
 
-class BaseView extends StatelessWidget {
+import '../widgets/extended_tab_controller.dart';
+
+import '../keys.dart';
+
+class BaseView extends StatefulWidget {
   final FirebaseAnalytics analytics;
   final FirebaseAnalyticsObserver observer;
-
-  final List<Widget> children = [
-    NewsViewport(),
-    HandbookViewport(),
-    PharmaViewport()
-  ];
 
   BaseView({
     Key key,
@@ -31,20 +27,69 @@ class BaseView extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _BaseViewState createState() => _BaseViewState();
+}
+
+class _BaseViewState extends State<BaseView> with TickerProviderStateMixin {
+  _BaseViewState({Key key});
+
+  ExtendedTabController _newsController;
+  ExtendedTabController _handbookController;
+  ExtendedTabController _pharmaController;
+
+  @override
+  void dispose() {
+    _newsController.dispose();
+    _handbookController.dispose();
+    _pharmaController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) => StoreConnector<AppState, _ViewModel>(
         distinct: true,
         converter: _ViewModel.fromStore,
         onInit: (store) {
-          print("onInit: ${store.state.tabIndex}");
+          _newsController = ExtendedTabController(
+            key: MercuryKeys.newsController,
+            vsync: this,
+            length: 3,
+            initialIndex: 0,
+            callback: (i) => store.dispatch(SetNewsIndexAction(i)),
+          );
+          _handbookController = ExtendedTabController(
+            key: MercuryKeys.handbookController,
+            vsync: this,
+            length: 4,
+            initialIndex: 0,
+            callback: (i) => store.dispatch(SetHandbookIndexAction(i)),
+          );
+          _pharmaController = ExtendedTabController(
+            key: MercuryKeys.pharmaController,
+            vsync: this,
+            length: 5,
+            initialIndex: 0,
+            callback: (i) => store.dispatch(SetPharmaIndexAction(i)),
+          );
+          store.dispatch(SetInitialTabAction());
         },
-        onWillChange: (vm) {
-          print("onWillChange: ${vm.activeIndex}");
-        },
+        onWillChange: (vm) {},
         builder: (context, vm) => Scaffold(
               appBar: PrimaryTopBar(
                 index: vm.activeIndex,
               ),
-              body: children[vm.activeIndex],
+              body: <Widget>[
+                MainViewport(
+                    key: MercuryKeys.newsViewport, controller: _newsController),
+                MainViewport(
+                  key: MercuryKeys.handbookViewport,
+                  controller: _handbookController,
+                ),
+                MainViewport(
+                  key: MercuryKeys.pharmaViewport,
+                  controller: _pharmaController,
+                ),
+              ][vm.activeIndex],
               bottomNavigationBar: PrimaryBottomBar(
                 currentIndex: vm.activeIndex,
                 onTabSelected: vm.onTabSelected,
