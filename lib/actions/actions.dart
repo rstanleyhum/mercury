@@ -1,3 +1,6 @@
+import '../models/article.dart';
+
+
 class SetTabIndexAction {
   final int index;
 
@@ -40,4 +43,31 @@ class SetInitialTabAction {
 
   @override
   String toString() => 'SetInitialTabAction{}}';
+}
+
+class SetNewsArticlesAction {
+  final List<Article> list;
+
+  SetNewsArticlesAction(this.list);
+
+  @override
+  String toString() => 'SetNewsArticlesAction{list.length: ${list.length}}';
+}
+
+class SetHandbookArticlesAction {
+  final List<Article> list;
+
+  SetHandbookArticlesAction(this.list);
+
+  @override
+  String toString() => 'SetHandbookArticlesAction{list.length: ${list.length}}';
+}
+
+class SetPharmaArticlesAction {
+  final List<Article> list;
+
+  SetPharmaArticlesAction(this.list);
+
+  @override
+  String toString() => 'SetPharmaArticlesAction{list.length: ${list.length}}';
 }

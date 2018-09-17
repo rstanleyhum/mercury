@@ -6,6 +6,8 @@ import 'models/app_state.dart';
 import 'reducers/app_state_reducer.dart';
 import 'main_app.dart';
 
+import 'assets.dart' as assets;
+
 void main() {
   final store = new Store<AppState>(
     appStateReducer,
@@ -14,6 +16,9 @@ void main() {
       newsIndex: 0,
       handbookIndex: 0,
       pharmaIndex: 0,
+      newsArticles: assets.newsList,
+      handbookArticles: assets.handbookList,
+      pharmaArticles: assets.pharmaList,
     ),
     middleware: [LoggingMiddleware.printer()],
   );

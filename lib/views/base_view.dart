@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
-import '../assets.dart' as assets;
-
 import '../actions/actions.dart';
 import '../models/app_state.dart';
 import '../models/article.dart';
@@ -56,22 +54,22 @@ class _BaseViewState extends State<BaseView> with TickerProviderStateMixin {
           _newsController = ExtendedTabController(
             key: MercuryKeys.newsController,
             vsync: this,
-            length: 3,
-            initialIndex: 0,
+            length: store.state.newsArticles.length,
+            initialIndex: store.state.newsIndex,
             callback: (i) => store.dispatch(SetNewsIndexAction(i)),
           );
           _handbookController = ExtendedTabController(
             key: MercuryKeys.handbookController,
             vsync: this,
-            length: 4,
-            initialIndex: 0,
+            length: store.state.handbookArticles.length,
+            initialIndex: store.state.handbookIndex,
             callback: (i) => store.dispatch(SetHandbookIndexAction(i)),
           );
           _pharmaController = ExtendedTabController(
             key: MercuryKeys.pharmaController,
             vsync: this,
-            length: 5,
-            initialIndex: 0,
+            length: store.state.pharmaArticles.length,
+            initialIndex: store.state.pharmaIndex,
             callback: (i) => store.dispatch(SetPharmaIndexAction(i)),
           );
           store.dispatch(SetInitialTabAction());
@@ -140,21 +138,27 @@ class _ViewModel {
 
   static _ViewModel fromStore(Store<AppState> store) => _ViewModel(
         activeIndex: store.state.tabIndex,
-        newsArticles: assets.newsList,
-        handbookArticles: assets.handbookList,
-        pharmaArticles: assets.pharmaList,
+        newsArticles: store.state.newsArticles,
+        handbookArticles: store.state.handbookArticles,
+        pharmaArticles: store.state.pharmaArticles,
         onTabSelected: (index) {
           store.dispatch(SetTabIndexAction(index));
         },
       );
 
   @override
-  int get hashCode => activeIndex.hashCode;
+  int get hashCode => activeIndex.hashCode ^
+    newsArticles.hashCode ^
+    handbookArticles.hashCode ^
+    pharmaArticles.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is _ViewModel &&
           runtimeType == other.runtimeType &&
+          newsArticles == other.newsArticles &&
+          handbookArticles == other.handbookArticles &&
+          pharmaArticles == other.pharmaArticles &&
           activeIndex == other.activeIndex;
 }

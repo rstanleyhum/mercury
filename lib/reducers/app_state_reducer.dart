@@ -1,10 +1,7 @@
 import 'package:redux/redux.dart';
 
-import '../assets.dart' as assets;
-
 import '../actions/actions.dart';
 import '../models/app_state.dart';
-import '../models/article.dart';
 
 
 final appStateReducer = combineReducers<AppState>([
@@ -13,23 +10,22 @@ final appStateReducer = combineReducers<AppState>([
   TypedReducer<AppState, SetHandbookIndexAction>(_setHandbookIndex),
   TypedReducer<AppState, SetPharmaIndexAction>(_setPharmaIndex),
   TypedReducer<AppState, SetInitialTabAction>(_setInitialTab),
+  TypedReducer<AppState, SetNewsArticlesAction>(_setNewsArticles),
+  TypedReducer<AppState, SetHandbookArticlesAction>(_setHandbookArticles),
+  TypedReducer<AppState, SetPharmaArticlesAction>(_setPharmaArticles),
 ]);
 
 AppState _setTabIndex(AppState state, SetTabIndexAction action) {
   int initialIndex;
-  List<Article> list; 
   switch (action.index) {
     case 0:
       initialIndex = state.newsIndex;
-      list = assets.newsList;
       break;
     case 1:
       initialIndex = state.handbookIndex;
-      list = assets.handbookList;
       break;
     case 2:
       initialIndex = state.pharmaIndex;
-      list = assets.pharmaList;
       break;
     default:
       initialIndex = 0;
@@ -37,7 +33,6 @@ AppState _setTabIndex(AppState state, SetTabIndexAction action) {
   return state.copyWith(
     tabIndex: action.index,
     initialIndex: initialIndex,
-    articleList: list,
   );
 }
 
@@ -56,8 +51,25 @@ AppState _setPharmaIndex(AppState state, SetPharmaIndexAction action) {
 AppState _setInitialTab(AppState state, SetInitialTabAction action) {
   return state.copyWith(
     tabIndex: 0,
-    articleList: assets.newsList,
     initialIndex: 0,
   );
 }
 
+AppState _setNewsArticles(AppState state, SetNewsArticlesAction action) {
+  return state.copyWith(
+    newsArticles: action.list,
+  );
+}
+
+AppState _setHandbookArticles(
+    AppState state, SetHandbookArticlesAction action) {
+  return state.copyWith(
+    handbookArticles: action.list,
+  );
+}
+
+AppState _setPharmaArticles(AppState state, SetPharmaArticlesAction action) {
+  return state.copyWith(
+    pharmaArticles: action.list,
+  );
+}
