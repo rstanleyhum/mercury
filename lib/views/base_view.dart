@@ -32,6 +32,7 @@ class BaseView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => StoreConnector<AppState, _ViewModel>(
+        distinct: true,
         converter: _ViewModel.fromStore,
         onInit: (store) {
           print("onInit: ${store.state.tabIndex}");

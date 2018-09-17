@@ -46,6 +46,14 @@ This is a test of the emergency broadcast system.
 By Stanley Hum
 """;
 
+String handbook4md = """
+# Handbook Article 4
+
+This is a test of the emergency broadcast system.
+
+By Stanley Hum
+""";
+
 String pharma1md = """
 # Pharma Article 1
 
@@ -71,6 +79,23 @@ By Stanley Hum
 """;
 
 
+String pharma4md = """
+# Pharma Article 4
+
+This is a test of the emergency broadcast system.
+
+By Stanley Hum
+""";
+
+
+String pharma5md = """
+# Pharma Article 5
+
+This is a test of the emergency broadcast system.
+
+By Stanley Hum
+""";
+
 var newsList = [news1md, news2md, news3md];
-var handbookList = [handbook1md, handbook2md, handbook3md];
-var pharmaList = [pharma1md, pharma2md, pharma3md];
+var handbookList = [handbook1md, handbook2md, handbook3md, handbook4md];
+var pharmaList = [pharma1md, pharma2md, pharma3md, pharma4md, pharma5md];
