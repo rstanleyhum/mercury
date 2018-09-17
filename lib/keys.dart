@@ -13,6 +13,9 @@ class MercuryKeys {
   static final handbookViewport = const Key('__handbookViewport__');
   static final pharmaViewport = const Key('__pharmaViewport__');
 
-  
+  // Drawer Keys
+  static final newsDrawer = const Key('__newsDrawer__');
+  static final handbookDrawer = const Key('__handbookDrawer__');
+  static final pharmaDrawer = const Key('__pharmaDrawer__');
 
 }

@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
+import '../assets.dart' as assets;
+
 import '../actions/actions.dart';
 import '../models/app_state.dart';
+import '../models/article.dart';
 
 import '../widgets/primary_top_bar.dart';
 import '../widgets/primary_bottom_bar.dart';
@@ -80,36 +83,66 @@ class _BaseViewState extends State<BaseView> with TickerProviderStateMixin {
               ),
               body: <Widget>[
                 MainViewport(
-                    key: MercuryKeys.newsViewport, controller: _newsController),
+                  key: MercuryKeys.newsViewport,
+                  controller: _newsController,
+                  articles: vm.newsArticles,
+                ),
                 MainViewport(
                   key: MercuryKeys.handbookViewport,
                   controller: _handbookController,
+                  articles: vm.handbookArticles,
                 ),
                 MainViewport(
                   key: MercuryKeys.pharmaViewport,
                   controller: _pharmaController,
+                  articles: vm.pharmaArticles,
                 ),
               ][vm.activeIndex],
               bottomNavigationBar: PrimaryBottomBar(
                 currentIndex: vm.activeIndex,
                 onTabSelected: vm.onTabSelected,
               ),
-              drawer: MainDrawer(),
+              drawer: [
+                MainDrawer(
+                  key: MercuryKeys.newsDrawer,
+                  controller: _newsController,
+                  articles: vm.newsArticles,
+                ),
+                MainDrawer(
+                  key: MercuryKeys.handbookDrawer,
+                  controller: _handbookController,
+                  articles: vm.handbookArticles,
+                ),
+                MainDrawer(
+                  key: MercuryKeys.pharmaDrawer,
+                  controller: _pharmaController,
+                  articles: vm.pharmaArticles,
+                ),
+              ][vm.activeIndex],
             ),
       );
 }
 
 class _ViewModel {
   final int activeIndex;
+  final List<Article> newsArticles;
+  final List<Article> handbookArticles;
+  final List<Article> pharmaArticles;
   final Function(int) onTabSelected;
 
   _ViewModel({
     @required this.activeIndex,
+    @required this.newsArticles,
+    @required this.handbookArticles,
+    @required this.pharmaArticles,
     @required this.onTabSelected,
   });
 
   static _ViewModel fromStore(Store<AppState> store) => _ViewModel(
         activeIndex: store.state.tabIndex,
+        newsArticles: assets.newsList,
+        handbookArticles: assets.handbookList,
+        pharmaArticles: assets.pharmaList,
         onTabSelected: (index) {
           store.dispatch(SetTabIndexAction(index));
         },
