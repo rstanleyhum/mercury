@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
+import 'package:redux_logging/redux_logging.dart';
 
 import 'models/app_state.dart';
 import 'reducers/app_state_reducer.dart';
@@ -14,6 +15,7 @@ void main() {
       handbookIndex: 0,
       pharmaIndex: 0,
     ),
+    middleware: [LoggingMiddleware.printer()],
   );
 
   runApp(MainApp(
