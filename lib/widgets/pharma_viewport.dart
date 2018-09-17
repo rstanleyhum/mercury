@@ -26,9 +26,10 @@ class _PharmaViewportState extends State<PharmaViewport>
         this._tabController = TabController(
           vsync: this,
           length: assets.pharmaList.length,
+          initialIndex: store.state.pharmaIndex,
         );
         this._tabController.addListener(() {
-          print("Pharma: onInit: Index: ${_tabController.index}");
+          store.dispatch(SetPharmaIndexAction(_tabController.index));
         });
       },
       builder: (context, vm) {
@@ -42,33 +43,23 @@ class _PharmaViewportState extends State<PharmaViewport>
 }
 
 class _ViewModel {
-  final int activeIndex;
   final List<String> articleList;
-  final Function(int) onChanging;
 
   _ViewModel({
-    @required this.activeIndex,
     @required this.articleList,
-    @required this.onChanging,
   });
 
   static _ViewModel fromStore(Store<AppState> store) => _ViewModel(
-        activeIndex: store.state.pharmaIndex,
         articleList: assets.pharmaList,
-        onChanging: (int index) {
-          print("PharmaViewport ViewModel OnChanging: $index");
-          store.dispatch(SetPharmaIndexAction(index));
-        },
       );
 
   @override
-  int get hashCode => activeIndex.hashCode ^ articleList.hashCode;
+  int get hashCode => articleList.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is _ViewModel &&
           runtimeType == other.runtimeType &&
-          activeIndex == other.activeIndex &&
           articleList == other.articleList;
 }

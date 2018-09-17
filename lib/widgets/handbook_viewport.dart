@@ -26,15 +26,10 @@ class _HandbookViewportState extends State<HandbookViewport>
         this._tabController = TabController(
           vsync: this,
           length: assets.handbookList.length,
+          initialIndex: store.state.handbookIndex,
         );
         this._tabController.addListener(() {
-          print("Handbook: onInit: Index: ${_tabController.index}");
-        });
-      },
-      onInitialBuild: (vm) {
-        print("Handbook: onInitialBuild!");
-        this._tabController.addListener(() {
-          vm.onChanging(_tabController.index);
+          store.dispatch(SetHandbookIndexAction(_tabController.index));
         });
       },
       builder: (context, vm) {
@@ -48,33 +43,23 @@ class _HandbookViewportState extends State<HandbookViewport>
 }
 
 class _ViewModel {
-  final int activeIndex;
   final List<String> articleList;
-  final Function(int) onChanging;
 
   _ViewModel({
-    @required this.activeIndex,
     @required this.articleList,
-    @required this.onChanging,
   });
 
   static _ViewModel fromStore(Store<AppState> store) => _ViewModel(
-        activeIndex: store.state.handbookIndex,
         articleList: assets.handbookList,
-        onChanging: (int index) {
-          print("HandbookViewport ViewModel OnChanging: $index");
-          store.dispatch(SetHandbookIndexAction(index));
-        },
       );
 
   @override
-  int get hashCode => activeIndex.hashCode ^ articleList.hashCode;
+  int get hashCode => articleList.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is _ViewModel &&
           runtimeType == other.runtimeType &&
-          activeIndex == other.activeIndex &&
           articleList == other.articleList;
 }
