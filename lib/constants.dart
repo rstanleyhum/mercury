@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
 int initialTabIndex = 0;
+int firstTabIndex = 0;
+int lastTabIndex = 2;
+
+int newsTabIndex = 0;
+int handbookTabIndex = 1;
+int pharmaTabIndex = 2;
+
+
 String materialAppTitle = 'Mercury Demo';
 
 String handbookTabTitle = 'Handbook';

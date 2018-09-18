@@ -71,3 +71,30 @@ class SetPharmaArticlesAction {
   @override
   String toString() => 'SetPharmaArticlesAction{list.length: ${list.length}}';
 }
+
+class SetAllArticlesAction {
+  final Map<String, Article> articles;
+
+  SetAllArticlesAction(this.articles);
+
+  @override
+  String toString() => 'SetAllArticlesAction{list.length: ${articles.length}}';
+}
+
+class SetHandbookIDAction {
+  final String id;
+
+  SetHandbookIDAction(this.id);
+
+  @override
+  String toString() => 'SetHandbookIDACtion{id: $id}';
+}
+
+class SetHandbookParentIDAction {
+  final String id;
+
+  SetHandbookParentIDAction(this.id);
+
+  @override
+  String toString() => 'SetHandbookParentIDACtion{id: $id}';
+}

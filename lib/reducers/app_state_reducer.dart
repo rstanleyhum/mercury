@@ -3,7 +3,6 @@ import 'package:redux/redux.dart';
 import '../actions/actions.dart';
 import '../models/app_state.dart';
 
-
 final appStateReducer = combineReducers<AppState>([
   TypedReducer<AppState, SetTabIndexAction>(_setTabIndex),
   TypedReducer<AppState, SetNewsIndexAction>(_setNewsIndex),
@@ -13,6 +12,9 @@ final appStateReducer = combineReducers<AppState>([
   TypedReducer<AppState, SetNewsArticlesAction>(_setNewsArticles),
   TypedReducer<AppState, SetHandbookArticlesAction>(_setHandbookArticles),
   TypedReducer<AppState, SetPharmaArticlesAction>(_setPharmaArticles),
+  TypedReducer<AppState, SetAllArticlesAction>(_setAllArticles),
+  TypedReducer<AppState, SetHandbookIDAction>(_setHandbookID),
+  TypedReducer<AppState, SetHandbookParentIDAction>(_setHandbookParentID),
 ]);
 
 AppState _setTabIndex(AppState state, SetTabIndexAction action) {
@@ -71,5 +73,24 @@ AppState _setHandbookArticles(
 AppState _setPharmaArticles(AppState state, SetPharmaArticlesAction action) {
   return state.copyWith(
     pharmaArticles: action.list,
+  );
+}
+
+AppState _setAllArticles(AppState state, SetAllArticlesAction action) {
+  return state.copyWith(
+    allArticles: action.articles,
+  );
+}
+
+AppState _setHandbookID(AppState state, SetHandbookIDAction action) {
+  return state.copyWith(
+    handbookID: action.id,
+  );
+}
+
+AppState _setHandbookParentID(
+    AppState state, SetHandbookParentIDAction action) {
+  return state.copyWith(
+    handbookParentID: action.id,
   );
 }

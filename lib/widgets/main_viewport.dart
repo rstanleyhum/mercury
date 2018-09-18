@@ -32,6 +32,7 @@ class _MainViewportState extends State<MainViewport>
   @override
   Widget build(BuildContext context) {
     return TabBarView(
+      key: Key("TabBarView - ${widget.key}"),
       children: widget.articles
           .map((v) => ArticleView(
                 key: PageStorageKey<String>(v.key),

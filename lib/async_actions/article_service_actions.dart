@@ -19,16 +19,36 @@ ThunkAction<AppState> loadArticles = (Store<AppState> store) async {
     var json = jsonDecode(s);
     var filenames = (json['filenames'] as List).cast<String>().toList();
     var articlesContent = await Future.wait(filenames.map((n) {
-      return _loadAsset(n);
+      return _loadAsset("assets/sensitive/$n");
     }));
     
-    List<Article> articles = new List<Article>();
+    Map<String, Article> articles = new Map<String, Article>();
     for (var i = 0; i < filenames.length; i++) {
       print(filenames[i]);
-      articles.add(Article.fromContents(filenames[i], articlesContent[i]));
+      articles[filenames[i]] = Article.fromContents(filenames[i], articlesContent[i]);
     }
 
-    store.dispatch(SetHandbookArticlesAction(articles));
+
+    String indexID = "nicu_section.md";
+    
+    Article indexArticle = articles[indexID];
+    Article parentArticle = articles[indexArticle.parent];
+
+    List<Article> handbookArticles = parentArticle.related.map((s) {
+      return articles[s];
+    }).toList();
+    int handbookIndex = parentArticle.related.indexOf(indexID);
+    
+    if (handbookIndex == -1) {
+      throw AssertionError("$indexID not found in parent ${parentArticle.key}");
+    }
+
+    store.dispatch(SetAllArticlesAction(articles));
+    store.dispatch(SetHandbookIDAction(indexID));
+    store.dispatch(SetHandbookParentIDAction(indexArticle.parent));
+    store.dispatch(SetHandbookIndexAction(handbookIndex));
+    store.dispatch(SetHandbookArticlesAction(handbookArticles));
+
   } catch (e) {
     print(e);
   }

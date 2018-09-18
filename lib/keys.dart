@@ -18,4 +18,6 @@ class MercuryKeys {
   static final handbookDrawer = const Key('__handbookDrawer__');
   static final pharmaDrawer = const Key('__pharmaDrawer__');
 
+  // Page Keys
+  static final splashView = const Key('__splashView__');
 }
