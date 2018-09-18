@@ -6,6 +6,7 @@ import '../models/app_state.dart';
 
 import '../constants.dart' as globals;
 
+import '../async_actions/article_service_actions.dart';
 import '../widgets/extended_tab_controller.dart';
 import '../models/article.dart';
 
@@ -97,8 +98,7 @@ class _ViewModel {
 
   static _ViewModel fromStore(Store<AppState> store) => _ViewModel(
         changeNews: () {
-          store.dispatch(SetNewsIndexAction(0));
-          store.dispatch(SetNewsArticlesAction(assets.news2List));
+          store.dispatch(loadArticles);
         },
         changeHandbook: () {
           store.dispatch(SetHandbookIndexAction(0));

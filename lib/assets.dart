@@ -230,55 +230,55 @@ By Stanley Hum
 
 
 var newsList = [
-  Article(key: 'news1md', mdcontent: news1md),
-  Article(key: 'news2md', mdcontent: news2md),
-  Article(key: 'news3md', mdcontent: news3md),
+  Article.fromContents('news1md', news1md),
+  Article.fromContents('news2md', news2md),
+  Article.fromContents('news3md', news3md),
 ];
 
 var news2List = [
-  Article(key: 'news1md', mdcontent: news1md),
-  Article(key: 'news5md', mdcontent: news5md),
-  Article(key: 'news6md', mdcontent: news6md),
-  Article(key: 'news7md', mdcontent: news7md),
-  Article(key: 'news8md', mdcontent: news8md),
+  Article.fromContents('news1md', news1md),
+  Article.fromContents('news5md', news5md),
+  Article.fromContents('news6md', news6md),
+  Article.fromContents('news7md', news7md),
+  Article.fromContents('news8md', news8md),
 ];
 
 var handbookList = [
-  Article(key: 'handbook1md', mdcontent: handbook1md),
-  Article(key: 'handbook2md', mdcontent: handbook2md),
-  Article(key: 'handbook3md', mdcontent: handbook3md),
-  Article(key: 'handbook4md', mdcontent: handbook4md),
+  Article.fromContents('handbook1md', handbook1md),
+  Article.fromContents('handbook2md', handbook2md),
+  Article.fromContents('handbook3md', handbook3md),
+  Article.fromContents('handbook4md', handbook4md),
 ];
 
 var handbook2List = [
-  Article(key: 'handbook1md', mdcontent: handbook1md),
-  Article(key: 'handbook5md', mdcontent: handbook5md),
-  Article(key: 'handbook6md', mdcontent: handbook6md),
-  Article(key: 'handbook9md', mdcontent: handbook9md),
+  Article.fromContents('handbook1md', handbook1md),
+  Article.fromContents('handbook5md', handbook5md),
+  Article.fromContents('handbook6md', handbook6md),
+  Article.fromContents('handbook9md', handbook9md),
 ];
 
 
 
 var pharmaList = [
-  Article(key: 'pharma1md', mdcontent: pharma1md),
-  Article(key: 'pharma2md', mdcontent: pharma2md),
-  Article(key: 'pharma3md', mdcontent: pharma3md),
-  Article(key: 'pharma4md', mdcontent: pharma4md),
-  Article(key: 'pharma5md', mdcontent: pharma5md),
+  Article.fromContents('pharma1md', pharma1md),
+  Article.fromContents('pharma2md', pharma2md),
+  Article.fromContents('pharma3md', pharma3md),
+  Article.fromContents('pharma4md', pharma4md),
+  Article.fromContents('pharma5md', pharma5md),
 ];
 
 
 var pharma2List = [
-  Article(key: 'pharma1md', mdcontent: pharma1md),
-  Article(key: 'pharma2md', mdcontent: pharma2md),
-  Article(key: 'pharma3md', mdcontent: pharma3md),
-  Article(key: 'pharma4md', mdcontent: pharma4md),
-  Article(key: 'pharma5md', mdcontent: pharma5md),
-  Article(key: 'pharma6md', mdcontent: pharma6md),
-  Article(key: 'pharma7md', mdcontent: pharma7md),
-  Article(key: 'pharma8md', mdcontent: pharma8md),
-  Article(key: 'pharma9md', mdcontent: pharma9md),
-  Article(key: 'pharma10md', mdcontent: pharma10md),
+  Article.fromContents('pharma1md', pharma1md),
+  Article.fromContents('pharma2md', pharma2md),
+  Article.fromContents('pharma3md', pharma3md),
+  Article.fromContents('pharma4md', pharma4md),
+  Article.fromContents('pharma5md', pharma5md),
+  Article.fromContents('pharma6md', pharma6md),
+  Article.fromContents('pharma7md', pharma7md),
+  Article.fromContents('pharma8md', pharma8md),
+  Article.fromContents('pharma9md', pharma9md),
+  Article.fromContents('pharma10md', pharma10md),
 ];
 
 

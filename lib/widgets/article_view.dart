@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 
+import '../models/article.dart';
+
 class ArticleView extends StatelessWidget {
-  final String txt;
+  final Article article;
 
   ArticleView({
     Key key,
-    this.txt
+    this.article
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Container(
-        child: Center(
-          child: Text(this.txt),
+        child: ListView(
+          padding: const EdgeInsets.all(5.0),
+          children: <Widget>[]
+            ..add(Text("Title ${article.title}"))
+            ..add(Text("Byline ${article.byline} (${article.date})"))
+            ..add(Text(this.article.mdcontent))
+            ..addAll(this.article.related.map((t) {
+              return Text(t);
+            })),
         ),
       );
 }

@@ -35,7 +35,7 @@ class _MainViewportState extends State<MainViewport>
       children: widget.articles
           .map((v) => ArticleView(
                 key: PageStorageKey<String>(v.key),
-                txt: v.mdcontent,
+                article: v,
               ))
           .toList(),
       controller: this._controller,
